@@ -128,7 +128,7 @@ function LoginPage() {
             }}
               onClick ={() => navigate("/register")}
             >
-              Sudah punya akun ? Daftar disini !
+              Sudah punya akun ? Daftar Sekarang !
           </div>
         </div>
       </div>
