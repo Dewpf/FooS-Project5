@@ -5,15 +5,18 @@ import RegisterPage from "./pages/Register";
 import { Route, Routes } from "react-router-dom";
 import NavbarComp from "./components/NavbarComp";
 import { Container } from "react-bootstrap";
+import MenuPage from "./pages/Menu";
 
 export default function App() {
   return (
     <Container>
       <NavbarComp />
+      {/* <MenuPage /> */}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/menu" element={<MenuPage />}></Route>
       </Routes>
     </Container>
   );

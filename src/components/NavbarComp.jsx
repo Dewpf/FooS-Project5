@@ -25,16 +25,15 @@ function NavbarComp() {
     window.location.reload()
   }
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar collapseOnSelect expand="lg" variant="dark">
       <Navbar.Brand 
         onClick={() => movePage("/")} 
-        style={{ cursor: 'pointer'}}>
-          FooS.</Navbar.Brand>
+        style={{ cursor: 'pointer'}}> <strong>FooS.</strong></Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link onClick={() => movePage("/")}>Beranda</Nav.Link>
-          <Nav.Link>Menu</Nav.Link>
+          <Nav.Link onClick={() => movePage("/menu")}>Menu</Nav.Link>
         </Nav>
         {
           checkLogin()
