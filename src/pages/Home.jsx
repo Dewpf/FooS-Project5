@@ -1,4 +1,5 @@
 import { Carousel } from "react-bootstrap";
+import Products from "../components/Products";
 
 function HomePage() {
   return (
@@ -42,6 +43,8 @@ function HomePage() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+      <h3 style={{ margin: "30px 0", textAlign: "center"}}><strong>Products</strong></h3>
+      <Products />
     </div>
   );
 }
