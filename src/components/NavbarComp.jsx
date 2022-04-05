@@ -32,8 +32,8 @@ function NavbarComp() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link onClick={() => movePage("/")}>Beranda</Nav.Link>
-          <Nav.Link onClick={() => movePage("/menu")}>Menu</Nav.Link>
+        <Nav.Link onClick={() => movePage("/")}><strong>Beranda</strong></Nav.Link>
+          <Nav.Link onClick={() => movePage("/menu")}><strong>Menu</strong></Nav.Link>
         </Nav>
         {
           checkLogin()
@@ -41,8 +41,9 @@ function NavbarComp() {
               <Nav.Link onClick={() => logout() }> Keluar </Nav.Link>
             </Nav>
           : <Nav>
-              <Nav.Link onClick={() => movePage("/login")}>Masuk</Nav.Link>
-              <Nav.Link onClick={() => movePage("/register")}>Daftar</Nav.Link>
+              <Nav.Link onClick={() => movePage("/login")}><strong>Masuk</strong></Nav.Link>
+              <hr />
+              <Nav.Link onClick={() => movePage("/register")}><strong>Daftar</strong></Nav.Link>
             </Nav>
         }
       </Navbar.Collapse>

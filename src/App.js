@@ -11,7 +11,6 @@ export default function App() {
   return (
     <Container>
       <NavbarComp />
-      {/* <MenuPage /> */}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>

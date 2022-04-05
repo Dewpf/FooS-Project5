@@ -79,7 +79,6 @@ function LoginPage() {
   }
 
   // untuk toast
-  const [showError, setShowError] = useState (false)
 
 
   return (
@@ -110,7 +109,6 @@ function LoginPage() {
               <Form.Control type="password" placeholder="Password" value={form.password} onChange={(e) => changePassword(e)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              {/* <Form.Check type="checkbox" label="Check me out" /> */}
             </Form.Group>
             <div className="d-flex justify-content-center">
               <Button variant="primary" type="submit">
