@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import NavbarComp from "./components/NavbarComp";
 import { Container } from "react-bootstrap";
 import MenuPage from "./pages/Menu";
+import ProductsPage from "./pages/ProductsPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/menu" element={<MenuPage />}></Route>
+        <Route path="/products" element={<ProductsPage />}></Route>
       </Routes>
     </Container>
   );

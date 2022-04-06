@@ -1,7 +1,9 @@
-import { Carousel } from "react-bootstrap";
+import { Carousel, Button } from "react-bootstrap";
 import Products from "../components/Products";
+import { useNavigate } from "react-router-dom"
 
 function HomePage() {
+  const navigate = useNavigate()
   return (
     <div className="m-4">
       <Carousel>
@@ -43,8 +45,11 @@ function HomePage() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      <h3 style={{ margin: "30px 0", textAlign: "center"}}><strong>Products</strong></h3>
-      <Products />
+      <h1 style={{ margin: "30px 0", textAlign: "center"}}><strong>Products</strong></h1>
+      <Products sumProduct={4} />
+      <div style={{ margin: "30px 0", textAlign: "center"}}>
+        <Button variant="outline-primary" onClick={() => navigate("/products")}><strong>SEMUA</strong></Button>
+      </div>
     </div>
   );
 }

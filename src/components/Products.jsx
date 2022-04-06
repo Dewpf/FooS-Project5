@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 import {Row, Col, Card} from "react-bootstrap"
-
-function Products (){
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+// parameter sumProduct hanya untuk menampilkan beberapa produk di home
+function Products ({ sumProduct }){
     // data produk
     const [dataProduct, setDataProduct] = useState([])
 
@@ -11,24 +13,33 @@ function Products (){
         .then((response) => response.json())
         .then((data) => {
             // console.log(data)
-        setDataProduct(data)
+            if (sumProduct){
+                const produk = data?.slice(0, sumProduct);
+                setDataProduct(produk)
+            } else {
+                setDataProduct(data)
+            }
         })
         .catch((err) => {
             console.log(err)
         })
-    }, [])
+    }, [sumProduct])
     return(
         <div>
-            <Row xs={2} md={3} className="g-4">
-                {dataProduct?.map((_, idx) => (
-                <Col>
+            <Row xs={2} md={4} className="g-4">
+                {dataProduct?.map((Products) => (
+                <Col key= {Products?.id}>
                     <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                        <Card.Title>Card title</Card.Title>
-                        <Card.Text>
-                        This is a longer card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit longer.
+                    <Card.Img variant="top" src={Products?.imgUrl} />
+                    <Card.Body> 
+                        <Card.Title>{Products?.name}</Card.Title>
+                        <Card.Text style={{ display: "flex", justifyContent: "space-between"}}>
+                            <div>
+                                Rp. {Number(Products?.price).toLocaleString("id-ID")}                           
+                            </div >
+                            <div>
+                                <FontAwesomeIcon icon={faCartShopping} />
+                            </div>
                         </Card.Text>
                     </Card.Body>
                     </Card>
