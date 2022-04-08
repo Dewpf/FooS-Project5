@@ -1,8 +1,12 @@
 import { Navbar, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { useSelectore } from "react-redux";
 
 function NavbarComp() {
   const navigate = useNavigate();
+  const cart = useSelectore(state => state.cart)
 
   const movePage = (path) => {
     navigate(path);
@@ -15,6 +19,7 @@ function NavbarComp() {
     } else {
       return false
     }
+    
   }
 
   // kondisi saat klik keluar maka akan muncul navbar masuk dan daftar
@@ -38,9 +43,17 @@ function NavbarComp() {
         {
           checkLogin()
           ? <Nav>
+            <Nav.Link>
+             {cart?.length ? cart?.length : ''} 
+             <FontAwesomeIcon icon={faCartShopping} style={{marginLeft: '5px' }} />
+            </Nav.Link>
               <Nav.Link onClick={() => logout() }> Keluar </Nav.Link>
             </Nav>
           : <Nav>
+            <Nav.Link>
+            {cart?.length ? cart?.lenght : ''}
+             <FontAwesomeIcon icon={faCartShopping} style={{marginLeft: '5px' }} />
+            </Nav.Link>
               <Nav.Link onClick={() => movePage("/login")}><strong>Masuk</strong></Nav.Link>
               <hr />
               <Nav.Link onClick={() => movePage("/register")}><strong>Daftar</strong></Nav.Link>
