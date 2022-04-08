@@ -46,9 +46,9 @@ function HomePage() {
         </Carousel.Item>
       </Carousel>
       <h1 style={{ margin: "30px 0", textAlign: "center"}}><strong>Products</strong></h1>
-      <Products sumProduct={4} />
+      <Products sumProduct={8} />
       <div style={{ margin: "30px 0", textAlign: "center"}}>
-        <Button variant="outline-primary" onClick={() => navigate("/products")}><strong>SEMUA</strong></Button>
+        <Button onClick={() => navigate("/products")}><strong>SEMUA</strong></Button>
       </div>
     </div>
   );

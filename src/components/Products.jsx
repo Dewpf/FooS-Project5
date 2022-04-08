@@ -2,8 +2,13 @@ import React, {useState, useEffect} from "react";
 import {Row, Col, Card} from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
+
 // parameter sumProduct hanya untuk menampilkan beberapa produk di home
 function Products ({ sumProduct }){
+    const navigate = useNavigate()
+
+
     // data produk
     const [dataProduct, setDataProduct] = useState([])
 
@@ -23,25 +28,45 @@ function Products ({ sumProduct }){
         .catch((err) => {
             console.log(err)
         })
-    }, [sumProduct])
+    }, [sumProduct]) 
+
+    //cara mengambil id untuk satu detail
+    const toDetails = (id) =>{
+        navigate ('/product/' + id)
+    }
+    
     return(
         <div>
             <Row xs={2} md={4} className="g-4">
                 {dataProduct?.map((Products) => (
                 <Col key= {Products?.id}>
-                    <Card>
-                    <Card.Img variant="top" src={Products?.imgUrl} />
-                    <Card.Body> 
-                        <Card.Title>{Products?.name}</Card.Title>
-                        <Card.Text style={{ display: "flex", justifyContent: "space-between"}}>
-                            <div>
-                                Rp. {Number(Products?.price).toLocaleString("id-ID")}                           
-                            </div >
-                            <div>
-                                <FontAwesomeIcon icon={faCartShopping} />
-                            </div>
-                        </Card.Text>
-                    </Card.Body>
+                    <Card style={{ cursor: "pointer"}}>
+                        <Card.Img variant="top" src={Products?.imgUrl} 
+                            onClick={() => {
+                                toDetails(Products?.id)
+                                // console.log (`dd cart products ${Products?.id}`)}
+                            }}
+                        />
+                        <Card.Body style={{ cursor: "pointer"}}> 
+                            <h3 onClick={() => {
+                                toDetails(Products?.id)                          
+                                }}>{Products?.name}
+                            </h3>
+                            <Card.Text style={{ display: "flex", justifyContent: "space-between"}}>
+                                <div>
+                                    <strong>
+                                        Rp. {Number(Products?.price).toLocaleString("id-ID")}                           
+                                    </strong>
+                                </div >
+                                <div onClick={() => {
+                                console.log (`add cart products ${Products?.id}`)}
+                                }>
+                                    <strong>
+                                        <FontAwesomeIcon icon={faCartShopping} />
+                                    </strong>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
                     </Card>
                 </Col>
                 ))}
