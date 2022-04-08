@@ -1,7 +1,14 @@
 import React, {useState, useEffect} from "react";
 import {Row, Col, Card} from "react-bootstrap"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
-function Products (){
+// parameter sumProduct hanya untuk menampilkan beberapa produk di home
+function Products ({ sumProduct }){
+    const navigate = useNavigate()
+
+
     // data produk
     const [dataProduct, setDataProduct] = useState([])
 
@@ -11,26 +18,55 @@ function Products (){
         .then((response) => response.json())
         .then((data) => {
             // console.log(data)
-        setDataProduct(data)
+            if (sumProduct){
+                const produk = data?.slice(0, sumProduct);
+                setDataProduct(produk)
+            } else {
+                setDataProduct(data)
+            }
         })
         .catch((err) => {
             console.log(err)
         })
-    }, [])
+    }, [sumProduct]) 
+
+    //cara mengambil id untuk satu detail
+    const toDetails = (id) =>{
+        navigate ('/product/' + id)
+    }
+    
     return(
         <div>
-            <Row xs={2} md={3} className="g-4">
-                {dataProduct?.map((_, idx) => (
-                <Col>
-                    <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                        <Card.Title>Card title</Card.Title>
-                        <Card.Text>
-                        This is a longer card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit longer.
-                        </Card.Text>
-                    </Card.Body>
+            <Row xs={2} md={4} className="g-4">
+                {dataProduct?.map((Products) => (
+                <Col key= {Products?.id}>
+                    <Card style={{ cursor: "pointer"}}>
+                        <Card.Img variant="top" src={Products?.imgUrl} 
+                            onClick={() => {
+                                toDetails(Products?.id)
+                                // console.log (`dd cart products ${Products?.id}`)}
+                            }}
+                        />
+                        <Card.Body style={{ cursor: "pointer"}}> 
+                            <h3 onClick={() => {
+                                toDetails(Products?.id)                          
+                                }}>{Products?.name}
+                            </h3>
+                            <Card.Text style={{ display: "flex", justifyContent: "space-between"}}>
+                                <div>
+                                    <strong>
+                                        Rp. {Number(Products?.price).toLocaleString("id-ID")}                           
+                                    </strong>
+                                </div >
+                                <div onClick={() => {
+                                console.log (`add cart products ${Products?.id}`)}
+                                }>
+                                    <strong>
+                                        <FontAwesomeIcon icon={faCartShopping} />
+                                    </strong>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
                     </Card>
                 </Col>
                 ))}
