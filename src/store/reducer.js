@@ -11,9 +11,15 @@ const reducer = (state = initialState, action) => {
              ...state,
              products: action.payload
             }
-            return newState 
+            return newState
+        case 'getCart':
+            const newStateCart = {
+            ...state,
+            cart: action.payload
+            } 
+            return newStateCart
         default: 
-        return state
+            return state
     }
 }
 

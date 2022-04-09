@@ -12,3 +12,49 @@ export const fetchProduct = () => {
         .catch(err => console.log(err))
     }
 }
+
+export const addToCart = (product) => {
+    return (dispatch, getState) => {
+        const cart = getState().cart
+
+        const newCart = []
+
+        for (let i = 0; i < cart?.length; i++) {
+            const cp = cart[i]
+            if (cp?.id === product?.id) {
+                cp.quantityOrder--
+        }
+        if (cp.quantityOrder > 0) {
+            newCart.push(cp)
+        } 
+    }
+
+        const action = {
+            type: 'getCart',
+            payload: newCart
+        }
+        dispatch(action)
+    }
+}
+
+export const removeCart = (product) => {
+    return (dispatch, getState) => {
+        const cart = getState().cart
+
+        const newCart = []
+
+        for (let i = 0; i < cart?.length; i++) {
+            const cp = cart[i]
+            if (cp?.id !== product?.id) {
+                newCart.push(cp)
+            }
+        }
+
+        const action = {
+            type: 'getCart',
+            payload: newCart
+        }
+        dispatch(action)
+    }
+}
+export const subCart = (product) => {}
