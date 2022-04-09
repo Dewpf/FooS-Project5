@@ -8,6 +8,7 @@ import { Container } from "react-bootstrap";
 import MenuPage from "./pages/Menu";
 import ProductsPage from "./pages/ProductsPage";
 import DetailProduct from "./pages/DetailProduct";
+import Cartpage from "./pages/Cart";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/menu" element={<MenuPage />}></Route>
         <Route path="/products" element={<ProductsPage />}></Route>
         <Route path="/product/:id" element={<DetailProduct />}></Route>
+        <Route path="/cart" element={<Cartpage />}/>
       </Routes>
     </Container>
   );
