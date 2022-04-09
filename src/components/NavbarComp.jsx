@@ -43,14 +43,14 @@ function NavbarComp() {
         {
           checkLogin()
           ? <Nav>
-            <Nav.Link>
+            <Nav.Link onClick={() => movePage("/cart")}>
              {cart?.length ? cart?.length : ''} 
              <FontAwesomeIcon icon={faCartShopping} style={{marginLeft: '5px' }} />
             </Nav.Link>
               <Nav.Link onClick={() => logout() }> Keluar </Nav.Link>
             </Nav>
           : <Nav>
-            <Nav.Link>
+            <Nav.Link onClick={() => movePage("/cart")}>
             {cart?.length ? cart?.lenght : ''}
              <FontAwesomeIcon icon={faCartShopping} style={{marginLeft: '5px' }} />
             </Nav.Link>

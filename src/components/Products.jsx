@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProduct } from "../store/action";
+import { fetchProduct, addToCart } from "../store/action";
 
 function Products ({ sumProduct }) {
     const [dataProduct, setDataProduct] = useState([]);
@@ -81,17 +81,16 @@ function Products ({ sumProduct }) {
                                 {
                                    checkSouldout(product)
                                    ? null
-                                   : 
+                                   : <div 
+                                       onClick={() => 
+                                         //console.log (`add cart products ${Products?.id}')
+                                         dispatch(addToCart(product))
+                                        }
+                                    >
+                                     <FontAwesomeIcon icon={faCartShopping} />
+                                    </div>
+
                                 }
-                                <div 
-                                  onClick={() => {
-                                    console.log (`add cart products ${Products?.id}`)}
-                                }
-                            >
-                                    <strong>
-                                        <FontAwesomeIcon icon={faCartShopping} />
-                                    </strong>
-                                </div>
                             </Card.Text>
                         </Card.Body>
                     </Card>
@@ -99,7 +98,7 @@ function Products ({ sumProduct }) {
                 ))}
             </Row>
         </div>
-    )
+    );
 }
 
 export default Products 
