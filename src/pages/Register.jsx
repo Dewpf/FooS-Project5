@@ -156,7 +156,7 @@ const onSubmit = (e) => {
             }}
               onClick ={() => navigate("/login")}
             >
-              Sudah punya akun ? Masuk disini !
+              Sudah punya akun ? Masuk
           </div>
 
         </div>

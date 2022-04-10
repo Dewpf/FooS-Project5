@@ -1,5 +1,5 @@
 import { Form, Button, Container } from "react-bootstrap";
-import { useNavigate} from "react-router-dom"
+import { useNavigate, useLocation} from "react-router-dom"
 import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -18,6 +18,8 @@ function LoginPage() {
 
 
   // get data(target) nilai(value)
+  const location = useLocation()
+  const stateLocation = Location?.state
   const changeEmail = (e) => {
       // console.log(e.target?.value)
       const value = e.target?.value
@@ -58,8 +60,16 @@ function LoginPage() {
               draggable: true,
               progress: undefined,
               });
+              
+              // console.log(location)
               localStorage.setItem('userLogin', form.email)
-              navigate('/')
+              const fromLocation = statelocation?.state?.from? .pathname
+              if (fromLocation) {
+                navigate(fromLocation)
+              } else {
+                navigate('/')
+              }
+              
           } else {
             console.log('Anda gagal masuk!! Silahkan coba lagi')
             toast.error('Kata sandi anda salah!', {
@@ -126,7 +136,7 @@ function LoginPage() {
             }}
               onClick ={() => navigate("/register")}
             >
-              Sudah punya akun ? Daftar disini !
+              Sudah punya akun ? Daftar Sekarang !
           </div>
         </div>
       </div>
