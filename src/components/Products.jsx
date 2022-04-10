@@ -4,31 +4,52 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 
+// usedispatch menghubungkan reducer dengan komponen > action
+// useselectro menghubungkan dengan parameter pertama
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProduct } from "../store/action";
+
 // parameter sumProduct hanya untuk menampilkan beberapa produk di home
 function Products ({ sumProduct }){
     const navigate = useNavigate()
 
-
     // data produk
     const [dataProduct, setDataProduct] = useState([])
 
+    const dispatch = useDispatch()
+
+    // const stateRedux = useSelector(state => state)
+    // console.log(stateRedux)
+    const myProducts = useSelector (state => state.myProducts) 
+    
     // mengambil data API dengan useeffect
-    useEffect(() => {
-        fetch("https://6247d3b64bd12c92f4041c17.mockapi.io/products")
-        .then((response) => response.json())
-        .then((data) => {
-            // console.log(data)
-            if (sumProduct){
-                const produk = data?.slice(0, sumProduct);
-                setDataProduct(produk)
-            } else {
-                setDataProduct(data)
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, [sumProduct]) 
+    useEffect(async() => {
+        await dispatch(fetchProduct())
+        // fetch("https://6247d3b64bd12c92f4041c17.mockapi.io/products")
+        // .then((response) => response.json())
+        // .then((data) => {
+        //     // console.log(data)
+        //     if (sumProduct){
+        //         const produk = data?.slice(0, sumProduct);
+        //         setDataProduct(produk)
+        //     } else {
+        //         setDataProduct(data)
+        //     }
+        // })
+        // .catch((err) => {
+        //     console.log(err)
+        // })
+    }, []) 
+
+    useEffect(()    => {
+        if (sumProduct){
+            const newProduk = Products?.slice(0, sumProduct);
+            setDataProduct(newProduk)
+        } else {
+            setDataProduct(myProducts)
+        }
+
+    }, [sumProduct, ])
 
     //cara mengambil id untuk satu detail
     const toDetails = (id) =>{
